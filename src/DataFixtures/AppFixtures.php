@@ -45,5 +45,11 @@ class AppFixtures extends Fixture
 
         // Sauvegarder les entités dans la base de donnéess
         $manager->flush();
+
+        $category = new Category();
+        $category->setName('Bande');
+        $category->setRayon($rayon); // Associe la catégorie au rayon
+        $manager->persist($category);
+
     }
 }

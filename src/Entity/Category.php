@@ -24,6 +24,8 @@ class Category
     #[ORM\ManyToOne(inversedBy: 'categories')]
     private ?Rayon $rayon = null;
 
+    
+
     public function __construct()
     {
         $this->products = new ArrayCollection();

@@ -35,6 +35,10 @@ class MemeberController extends AbstractController
      **/
     public function index(): Response
     {
+        $user = $this->getUser(); // Récupère l'utilisateur connecté
+         dump($user); // Affiche l'objet utilisateur dans la console de Symfony
+
+         
         $members = $this->memberRepository->findAll();
         return $this->render('memeber/index.html.twig', [
             'members' => $members,
