@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Entity;
 
 use App\Repository\RayonRepository;
@@ -21,13 +20,9 @@ class Rayon
     #[ORM\OneToMany(mappedBy: 'rayon', targetEntity: Category::class)]
     private Collection $categories;
 
-    #[ORM\OneToMany(mappedBy: 'rayon', targetEntity: Memeber::class)]
-    private Collection $memebers;
-
     public function __construct()
     {
         $this->categories = new ArrayCollection();
-        $this->memebers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -45,6 +40,11 @@ class Rayon
         $this->name = $name;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name; // Retourne le nom pour l'affichage
     }
 
     /**
@@ -68,45 +68,11 @@ class Rayon
     public function removeCategory(Category $category): self
     {
         if ($this->categories->removeElement($category)) {
-            // set the owning side to null (unless already changed)
             if ($category->getRayon() === $this) {
                 $category->setRayon(null);
             }
         }
 
         return $this;
-    }
-
-    /**
-     * @return Collection<int, Memeber>
-     */
-    public function getMemebers(): Collection
-    {
-        return $this->memebers;
-    }
-
-    public function addMemeber(Memeber $memeber): self
-    {
-        if (!$this->memebers->contains($memeber)) {
-            $this->memebers->add($memeber);
-            $memeber->setRayon($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMemeber(Memeber $memeber): self
-    {
-        if ($this->memebers->removeElement($memeber)) {
-            // set the owning side to null (unless already changed)
-            if ($memeber->getRayon() === $this) {
-                $memeber->setRayon(null);
-            }
-        }
-
-        return $this;
-    }
-    public function __toString(){
-        return $this->name;
     }
 }

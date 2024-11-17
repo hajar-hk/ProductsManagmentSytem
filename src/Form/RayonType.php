@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Form;
 
 use App\Entity\Rayon;
@@ -8,21 +7,19 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-
 class RayonType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('Submit',SubmitType::class)
-        ;
+            ->add('name') // Champ pour le nom du rayon
+            ->add('Submit', SubmitType::class); // Bouton de soumission
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Rayon::class,
+            'data_class' => Rayon::class, // Associe le formulaire à l'entité Rayon
         ]);
     }
 }
