@@ -25,21 +25,19 @@
                         <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
-                  {% for categorie in categories %}
-                     <tr>
-                        <td>{{loop.index}}</td>
-                        <td>{{categorie.name}}</td>
-                        <td>{{categorie.rayon.name}}</td>
-                        
-                          <td class=" justify-content-around align-item-center">
-                          <form id="{{categorie.id}}" action="{{path('category_delete',{id: categorie.id})}}" method="post"></form>
-                            <button onclick="deleteItem('{{categorie.id}}')" class="btn btn-sm btn-danger" type="submit">Delete</button>
-                          </td>
-                        
-                     </tr>
-                  {% endfor %}   
-              </tbody>
+             <tbody>
+    {% for categorie in categories %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ categorie.name }}</td>
+            <td>{{ categorie.rayon is not null ? categorie.rayon.name : 'N/A' }}</td>
+            <td class="justify-content-around align-item-center">
+                <form id="{{ categorie.id }}" action="{{ path('category_delete', { id: categorie.id }) }}" method="post"></form>
+                <button onclick="deleteItem('{{ categorie.id }}')" class="btn btn-sm btn-danger" type="submit">Delete</button>
+            </td>
+        </tr>
+    {% endfor %}
+</tbody>
             </table>
          </div>     
          </div>
