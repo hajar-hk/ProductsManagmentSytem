@@ -33,9 +33,10 @@ class AppFixtures extends Fixture
         // Création des rayons
         $rayonNames = [
             'Water Sports',
-            'Fitness & Exercice',
+            'Team Sports',
             'Outdoors',
-            'Team Sports'
+            'Fitness & Exercice',
+
         ];
 
         foreach ($rayonNames as $rayonName) {
