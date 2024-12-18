@@ -126,12 +126,15 @@ class ProductController extends AbstractController
     #[Route('/product/rayon/{idRayon}', name: 'rayon_product_list')]
     public function rayonProduct(int $idRayon): Response
     {
-       
         $products = $this->productRepository->findProductsOfRayon($idRayon);
+    
+        if (empty($products)) {
+            $this->addFlash('warning', 'Aucun produit trouvé pour ce rayon.');
+        }
+    
         return $this->render('product/rayonProducts.html.twig', [
-            'products' => $products,     
+            'products' => $products,
         ]);
     }
-
-
+    
 }

@@ -40,51 +40,22 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     public function findProductsOfRayon(int $idRayon): array
-    {
-        $conn = $this->getEntityManager()->getConnection();
+{
+    // Rédaction de la requête DQL
+    $dql = '
+        SELECT p
+        FROM App\Entity\Product p
+        JOIN p.category c
+        JOIN c.rayon r
+        WHERE r.id = :idRayon
+    ';
 
-        $sql = '
-            SELECT * FROM (rayon join category on rayon.id = category.rayon_id) join product on product.category_id= category.id where rayon.id= :idRayon
-            ';
-        $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery(['idRayon' => $idRayon]);
+    
 
-        // returns an array of arrays (i.e. a raw data set)
-        return $resultSet->fetchAllAssociative();
-    }
+    // Exécution de la requête
+    return $this->_em->createQuery($dql) // $this->_em représente l'EntityManager
+        ->setParameter('idRayon', $idRayon) // Définir la valeur du paramètre :idRayon
+        ->getResult(); // Retourne un tableau d'objets Product
+}
 
-
-
-
-
-
-
-
-
-
-
-//    /**
-//     * @return Product[] Returns an array of Product objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Product
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

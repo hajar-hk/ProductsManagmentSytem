@@ -18,7 +18,7 @@ class CategoryType extends AbstractType
             ->add('rayon', EntityType::class, [
                 'class' => Rayon::class, // Spécifie l'entité Rayon
                 'choice_label' => 'name', // Affichage du nom du rayon
-                'placeholder' => 'Choisissez un rayon', // Option vide au début
+                //'placeholder' => 'Choisissez un rayon', // Option vide au début
             ])
             ->add('Submit', SubmitType::class); // Bouton de soumission
     }
